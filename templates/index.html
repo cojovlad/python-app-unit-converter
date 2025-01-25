@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter with AI</title>
+</head>
+<body>
+    <h1>Unit Converter</h1>
+    <form action="/" method="POST">
+        <label for="value">Value:</label>
+        <input type="text" id="value" name="value" required><br><br>
+
+        <label for="from_unit">From Unit:</label>
+        <input type="text" id="from_unit" name="from_unit" required><br><br>
+
+        <label for="to_unit">To Unit:</label>
+        <input type="text" id="to_unit" name="to_unit" required><br><br>
+
+        <button type="submit">Convert</button>
+    </form>
+
+    {% if result %}
+    <h2>Converted Value: {{ result }}</h2>
+    {% endif %}
+</body>
+</html>
