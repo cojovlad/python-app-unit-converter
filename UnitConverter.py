@@ -5,7 +5,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 # OpenAI API key
-openai.api_key = ''  # Replace with your actual API key
+#openai.api_key = ''  # Replace with your actual API key
 
 # Function to call OpenAI API to process the unit conversion request
 def convert_units(value, from_unit, to_unit):
