@@ -1,24 +1,30 @@
-import openai
+import os
+
+from openai import OpenAI
+from dotenv import load_dotenv
 from flask import Flask, render_template, request
 
-# Set up Flask
 app = Flask(__name__)
 
-# OpenAI API key
-#openai.api_key = ''  # Replace with your actual API key
+# AIML API Key and Base URL
+api_key = os.getenv("API_KEY")
+base_url = 'https://api.aimlapi.com/v1'
 
-# Function to call OpenAI API to process the unit conversion request
+# Initialize OpenAI client with AIML API endpoint
+api = OpenAI(api_key=api_key, base_url=base_url)
+
 def convert_units(value, from_unit, to_unit):
-    completion = openai.ChatCompletion.create(
-        model="gpt-4o-mini",  # Free-tier model, replace with your choice
+    completion = api.chat.completions.create(
+        model="mistralai/Mistral-7B-Instruct-v0.2",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": "You are a helpful assistant skilled in unit conversions."},
             {"role": "user", "content": f"Convert {value} {from_unit} to {to_unit}."}
-        ]
+        ],
+        temperature=0.3,
+        max_tokens=256,
     )
-    return completion['choices'][0]['message']['content'].strip()
+    return completion.choices[0].message.content.strip()
 
-# Route for handling form submission
 @app.route("/", methods=["GET", "POST"])
 def index():
     result = None
@@ -26,12 +32,8 @@ def index():
         value = request.form["value"]
         from_unit = request.form["from_unit"]
         to_unit = request.form["to_unit"]
-
-        # Call the OpenAI API for conversion
         result = convert_units(value, from_unit, to_unit)
-
     return render_template("index.html", result=result)
 
-# Run the app
 if __name__ == "__main__":
     app.run(debug=True)

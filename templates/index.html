@@ -1,27 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit Converter with AI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Unit Converter</title>
+  <style>
+    body {
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #000000;
+      text-shadow: 2px 2px #cccccc;
+      margin-bottom: 20px;
+    }
+    form {
+      background-color: #ffffff;
+      border: 2px solid #000000;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      width: 90%;
+      max-width: 400px;
+    }
+    label {
+      font-size: 1.2em;
+      color: #000000;
+    }
+    input {
+      padding: 10px;
+      border-radius: 5px;
+      border: 2px solid #000000;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 1em;
+      background-color: #ffffff;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #000000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #333333;
+    }
+    h2 {
+      margin-top: 20px;
+      color: #000000;
+      text-shadow: 1px 1px #cccccc;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <h1>Unit Converter</h1>
-    <form action="/" method="POST">
-        <label for="value">Value:</label>
-        <input type="text" id="value" name="value" required><br><br>
+  <h1>AI Unit Converter</h1>
 
-        <label for="from_unit">From Unit:</label>
-        <input type="text" id="from_unit" name="from_unit" required><br><br>
+  <!-- Form for user input -->
+  <form action="/" method="POST">
+    <!-- Value input: User types the value they want to convert -->
+    <label for="value">Value:</label>
+    <input type="text" id="value" name="value" required />
 
-        <label for="to_unit">To Unit:</label>
-        <input type="text" id="to_unit" name="to_unit" required><br><br>
+    <!-- From Unit input: User types the unit they are converting from -->
+    <label for="from_unit">From Unit:</label>
+    <input type="text" id="from_unit" name="from_unit" required />
 
-        <button type="submit">Convert</button>
-    </form>
+    <!-- To Unit input: User types the unit they want to convert to -->
+    <label for="to_unit">To Unit:</label>
+    <input type="text" id="to_unit" name="to_unit" required />
 
-    {% if result %}
-    <h2>Converted Value: {{ result }}</h2>
-    {% endif %}
+    <!-- Submit button to trigger the conversion -->
+    <button type="submit">Convert</button>
+  </form>
+
+  <!-- Display the result after conversion -->
+  {% if result %}
+  <h2>Converted Value: {{ result }}</h2>
+  <!-- result is a variable sent from Flask containing the converted value -->
+  {% endif %}
 </body>
 </html>
